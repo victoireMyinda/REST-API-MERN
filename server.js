@@ -1,12 +1,15 @@
 const express = require("express")
 
+const route = require("./route/route")
+
 const detenv = require('dotenv').config({ path: "./config/.env" })
 
 const app = express()
 
-app.get("/", (request, response) => {
-    response.send("Welcome")
-})
+
+
+//route
+app.use("/api/user", route)
 
 
 
