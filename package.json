@@ -1,0 +1,19 @@
+{
+    "name": "api-rest-men",
+    "version": "1.0.0",
+    "description": "utilisation de l'API REST avec MEN",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "author": "victoire myinda",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "mongodb": "^4.11.0",
+        "mongoose": "^6.7.1",
+        "nodemon": "^2.0.20"
+    }
+}
