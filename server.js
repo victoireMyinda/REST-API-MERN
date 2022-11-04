@@ -6,8 +6,6 @@ const detenv = require('dotenv').config({ path: "./config/.env" })
 
 const app = express()
 
-
-
 //route
 app.use("/api/user", route)
 

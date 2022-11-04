@@ -1,15 +1,25 @@
-exports.create = (request, response) => {
+const asyncHandler = require("express-async-handler")
+
+const createUser = asyncHandler(async(request, response) => {
     response.status(200).json({ message: "GET success" })
-}
+})
 
-exports.find = (request, response) => {
+const findUser = asyncHandler(async(request, response) => {
     response.status(200).json({ message: "SET success" })
-}
+})
 
-exports.update = (request, response) => {
+const updateUser = asyncHandler(async(request, response) => {
     response.status(200).json({ message: "UPDATE success" })
-}
+})
 
-exports.delete = (request, response) => {
+const deleteUser = asyncHandler(async(request, response) => {
     response.status(200).json({ message: "DELETE success" })
+})
+
+
+module.exports = {
+    createUser,
+    findUser,
+    updateUser,
+    deleteUser
 }
