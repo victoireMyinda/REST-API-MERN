@@ -1,22 +1,14 @@
 const express = require("express")
+const controller = require("../controller/userController")
 
 const router = express.Router()
 
-router.get('/', (request, response) => {
-    response.status(200).json({ message: "GET success" })
-})
+router.get('/', controller.create)
 
-router.post('/', (request, response) => {
-    response.status(200).json({ message: "SET success" })
-})
+router.post('/', controller.find)
 
-router.put('/:id', (request, response) => {
-    response.status(200).json({ message: `UPDATE success ${request.params.id}` })
-})
+router.put('/:id', controller.update)
 
-
-router.delete('/:id', (request, response) => {
-    response.status(200).json({ message: `DELETE success ${request.params.id}` })
-})
+router.delete('/:id', controller.delete)
 
 module.exports = router

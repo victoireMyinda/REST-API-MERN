@@ -1,1 +1,15 @@
- 
+exports.create = (request, response) => {
+    response.status(200).json({ message: "GET success" })
+}
+
+exports.find = (request, response) => {
+    response.status(200).json({ message: "SET success" })
+}
+
+exports.update = (request, response) => {
+    response.status(200).json({ message: "UPDATE success" })
+}
+
+exports.delete = (request, response) => {
+    response.status(200).json({ message: "DELETE success" })
+}
