@@ -1,10 +1,14 @@
 const express = require("express")
-const { createUser, updateUser, findUser, deleteUser } = require("../controller/userController")
+const { createClient, updateClient, findClient, deleteClient } = require("../controller/userController")
 
 const router = express.Router()
 
-router.get('/', createUser).post('/', findUser)
-router.put('/:id', updateUser).delete('/:id', deleteUser)
+
+// API CRUD client
+router.post('/api/client', createClient)
+router.get('/api/client', findClient)
+router.put('/api/client/:id', updateClient)
+router.delete('/api/client/:id', deleteClient)
 
 
 

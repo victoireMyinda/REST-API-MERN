@@ -1,25 +1,69 @@
 const asyncHandler = require("express-async-handler")
+const clientModel = require("../model/models")
 
-const createUser = asyncHandler(async(request, response) => {
-    response.status(200).json({ message: "GET success" })
+
+//Creer un client
+const createClient = async(request, response) => {
+
+    // validate request
+    if (!request.body) {
+        res.status(400).send({ message: "Content can not be emtpy!" });
+        return;
+    }
+
+    //new client
+    const createClient = new clientModel({
+        nom: request.body.nom,
+        prenom: request.body.prenom,
+        adresse: request.body.adresse,
+        modele: request.body.modele,
+        contact: request.body.contact,
+        mesure: {
+            londDevant: request.body.londDevant,
+            epaul: request.body.epaul,
+            tourEncolure: request.body.tourEncolure,
+            tourPoitrine: request.body.tourPoitrine,
+            tourTaille: request.body.tourEncolure,
+            tourBassin: request.body.tourBassin,
+            carrureDos: request.body.carrureDos,
+            carrureDevant: request.body.carrureDevant,
+            longEpaule: request.body.longEpaule,
+            longBras: request.body.longBras
+        }
+    })
+
+    // save client in the database
+    createClient
+        .save(createClient)
+        .then(data => {
+            response.send(data)
+            response.status(200)
+        })
+        .catch(err => {
+            response.status(500).send({
+                message: err.message || "Some error occurred while creating a create operation"
+            });
+        });
+}
+
+
+
+const findClient = asyncHandler(async(request, response) => {
+
+    if (!request.body) {
+        response.status(400)
+        throw new Error("champs requis")
+    }
+    response.status(200).json(createClient)
 })
 
-const findUser = asyncHandler(async(request, response) => {
-    response.status(200).json({ message: "SET success" })
-})
-
-const updateUser = asyncHandler(async(request, response) => {
+const updateClient = asyncHandler(async(request, response) => {
     response.status(200).json({ message: "UPDATE success" })
 })
 
-const deleteUser = asyncHandler(async(request, response) => {
+const deleteClient = asyncHandler(async(request, response) => {
     response.status(200).json({ message: "DELETE success" })
 })
 
 
-module.exports = {
-    createUser,
-    findUser,
-    updateUser,
-    deleteUser
-}
+module.exports = { createClient, updateClient, findClient, deleteClient }

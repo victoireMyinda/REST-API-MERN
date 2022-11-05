@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 //route
-app.use("/api/user", route)
+app.use("/", route)
 
 
 
