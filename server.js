@@ -2,9 +2,17 @@ const express = require("express")
 
 const route = require("./route/route")
 
+const connectDB = require("./database/connexion")
+
 const detenv = require('dotenv').config({ path: "./config/.env" })
 
 const app = express()
+
+connectDB()
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+
 
 //route
 app.use("/api/user", route)
