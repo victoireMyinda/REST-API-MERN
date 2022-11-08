@@ -10,6 +10,4 @@ router.get('/api/client', findClient)
 router.put('/api/client/:id', updateClient)
 router.delete('/api/client/:id', deleteClient)
 
-
-
 module.exports = router

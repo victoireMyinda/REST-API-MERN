@@ -1,4 +1,3 @@
-const asyncHandler = require("express-async-handler")
 const clientModel = require("../model/models")
 
 
@@ -7,7 +6,7 @@ const createClient = async(request, response) => {
 
     // validate request
     if (!request.body) {
-        res.status(400).send({ message: "Content can not be emtpy!" });
+        response.status(400).send({ message: "Content can not be emtpy!" });
         return;
     }
 
@@ -53,7 +52,7 @@ const findClient = async(request, response) => {
     if (request.query.id) {
         const id = request.query.id;
 
-        createClient.findById(id)
+        clientModel.findById(id)
             .then(data => {
                 if (!data) {
                     response.status(404).send({ message: "Not found user with id " + id })
@@ -67,7 +66,7 @@ const findClient = async(request, response) => {
             })
 
     } else {
-        createClient.find()
+        clientModel.find()
             .then(client => {
                 response.send(client)
                 response.status(200)
@@ -79,19 +78,52 @@ const findClient = async(request, response) => {
 }
 
 
+//update client
+const updateClient = async(request, response) => {
+    if (!request.body) {
+        return response
+            .status(400)
+            .send({ message: "Data to update can not be empty" })
+    }
+
+    const id = request.params.id;
+    clientModel.findByIdAndUpdate(id, request.body)
+        .then(data => {
+            if (!data) {
+                response.status(404).send({ message: `Cannot Update user with ${id}. Maybe user not found!` })
+            } else {
+                response.send(data)
+            }
+        })
+        .catch(err => {
+            response.status(500).send({ message: "Error Update user information" })
+        })
+}
+
+
+//deleteClient
+const deleteClient = (request, response) => {
+    const id = request.params.id;
+
+    clientModel.findByIdAndDelete(id)
+        .then(data => {
+            if (!data) {
+                response.status(404).send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` })
+            } else {
+                response.send({
+                    message: "client was deleted successfully!"
+                })
+            }
+        })
+        .catch(err => {
+            response.status(500).send({
+                message: "Could not delete User with id=" + id
+            });
+        });
+}
 
 
 
 
 
-
-const updateClient = asyncHandler(async(request, response) => {
-    response.status(200).json({ message: "UPDATE success" })
-})
-
-const deleteClient = asyncHandler(async(request, response) => {
-    response.status(200).json({ message: "DELETE success" })
-})
-
-
-module.exports = { createClient, updateClient, findClient, deleteClient }
+module.exports = { createClient, findClient, updateClient, deleteClient }

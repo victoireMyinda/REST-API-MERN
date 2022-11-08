@@ -4,7 +4,8 @@ const route = require("./route/route")
 
 const connectDB = require("./database/connexion")
 
-const detenv = require('dotenv').config({ path: "./config/.env" })
+const dotenv = require('dotenv')
+dotenv.config({ path: "./config/.env" })
 
 const app = express()
 
